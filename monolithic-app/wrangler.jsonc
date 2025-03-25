@@ -1,0 +1,39 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "marketplace-agent",
+	"main": "src/worker.js",
+	"compatibility_date": "2025-02-23",
+	"compatibility_flags": ["nodejs_compat"],
+
+	// Public environment variables
+	"vars": {
+		// OPENAI_API_KEY should be set as a secret
+	},
+
+	"dev": {
+		"ip": "127.0.0.1",
+		"port": 8787,
+		"local_protocol": "http"
+	},
+
+	// Durable Object bindings
+	"durable_objects": {
+		"bindings": [
+			{
+				"name": "MarketplaceAgent",
+				"class_name": "MarketplaceAgent"
+			}
+		]
+	},
+
+	// Migrations for Durable Objects
+	"migrations": [
+		{
+			"tag": "v1",
+			"new_sqlite_classes": ["MarketplaceAgent"]
+		}
+	],
+	"observability": {
+		"enabled": true
+	}
+}

@@ -1,10 +1,10 @@
 # Marketplace Assistant - Initial Monolithic Application
 
-This is the initial implementation of our AI-powered Marketplace Assistant. It's a monolithic application that handles all aspects of the shopping experience, from product recommendations to delivery estimation, purchase processing, and notifications.
+This is the updated implementation of our [AI-powered Marketplace Assistant](https://github.com/orra-dev/agent-fragile-to-prod-guide/tree/main/monolithic-app#marketplace-assistant---initial-monolithic-application), now powered by [Cloudflare Agents](https://developers.cloudflare.com/agents/). It's a monolithic application that handles all aspects of the shopping experience, from product recommendations to delivery estimation, purchase processing, and notifications.
 
 ## Architecture
 
-This a classic Agent setup where an LLM uses tool calling to find info and execute tasks.
+This implementation leverages Cloudflare Agents. The assistant uses OpenAI for tool calling and interacts with users to find products and execute tasks through a terminal-based interface.
 
 There's a minor twist where we also call another Agent using a tool call (simulated for delivery estimates).
 
@@ -27,8 +27,8 @@ This initial implementation has several limitations:
 2. **Token Inefficiency**: The whole context is passed to the LLM for every operation, even for deterministic tasks.
 3. **Reliability Issues**: A failure in any component impacts the entire application.
 4. **Debugging Complexity**: Difficult to isolate issues within the monolith.
-5. **Scalability Challenges**: The entire application needs to scale together.
-6. **Managing State Across failures is hard**: When failures occur mid-transaction, the system can be left in an inconsistent state.
+5. **Scalability Challenges**: The entire application needs to scale together - however cloudflare durable objects do simplify this.
+6. **Managing State Across failures is hard**: Even with a durable object's internal trackable state, this is still an issue as a failure might occur post transaction completion.
 
 ### Critical Bug: Inventory Inconsistency
 
@@ -50,17 +50,28 @@ This bug was deliberately included to demonstrate why compensation handling is n
 npm install
 ```
 
-2. Setup the appplication's data:
+2. Setup the application's env vars:
 ```shell
-cp data.json-example data.json
+cp .dev.vars.example .dev.vars
+# Update the OPENAI_API_KEY with your own value.
 ```
 
-3. Start the application:
+3. Setup the application's data:
+```shell
+cp src/data.json-example src/data.json
+```
+
+4. Start the application:
 ```shell
 npm start
 ```
 
-4. Interact with the assistant via the terminal interface, [using this interaction script](../README.md#example-user-interaction).
+5. Open another terminal and start the terminal interface:
+```shell
+npm run terminal
+```
+
+6. Interact with the assistant via the terminal interface, [using this interaction script](../README.md#example-user-interaction).
 
 ## Next Steps
 

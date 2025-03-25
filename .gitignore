@@ -2,10 +2,14 @@
 node_modules/
 package-lock.json
 
+# Cloudflare
+.wrangler
+
 # Environment variables
 .env
 .env.local
 .env.production
+.dev.vars
 
 # Build files
 dist/
@@ -28,6 +32,7 @@ Thumbs.db
 
 # Data
 monolithic-app/data.json
+monolithic-app/src/data.json
 stage1-architecture/data.json
 stage2-consistency/data.json
 stage3-grounding/data.json

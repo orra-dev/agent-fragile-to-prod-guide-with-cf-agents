@@ -1,29 +1,33 @@
 {
-  "name": "marketplace-assistant",
+  "name": "marketplace-agent",
   "version": "1.0.0",
-  "description": "A monolithic AI-powered marketplace assistant",
-  "main": "index.js",
+  "description": "A monolithic Cloudflare Agent-powered marketplace assistant",
+  "main": "src/worker.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
+    "start": "wrangler dev --log-level info",
+    "deploy": "wrangler deploy",
+    "terminal": "node src/terminal-client.js",
+    "format": "prettier --write 'src/**/*.{js,json}'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "ai",
     "marketplace",
     "assistant",
-    "llm"
+    "llm",
+    "cloudflare",
+    "agents"
   ],
   "author": "Team orra",
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
-    "lowdb": "^7.0.1",
+    "agents": "^0.0.43",
     "openai": "^4.11.0",
-    "readline-sync": "^1.4.10"
+    "ws": "^8.16.0"
   },
   "devDependencies": {
+    "prettier": "^3.2.5",
     "wrangler": "^4.4.0"
   }
 }
