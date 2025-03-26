@@ -1,8 +1,8 @@
 {
-	"name": "marketplace-data-service",
+	"name": "inventory-tool-do",
 	"version": "1.0.0",
-	"description": "A central data service that provides access to marketplace products, user info, orders, etc..",
-	"main": "index.js",
+	"description": "Inventory management previously a tool now a Cloudflare DO service for the marketplace assistant",
+	"main": "do.js",
 	"type": "module",
 	"scripts": {
 		"start": "wrangler dev --log-level info",
@@ -11,7 +11,9 @@
 	},
 	"author": "Team orra",
 	"license": "MIT",
-	"dependencies": {},
+	"dependencies": {
+		"@orra.dev/sdk": "^0.2.3"
+	},
 	"devDependencies": {
 		"wrangler": "^4.4.0"
 	}

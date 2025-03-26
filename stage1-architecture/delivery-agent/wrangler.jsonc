@@ -2,7 +2,7 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "delivery-agent",
 	"main": "index.js",
-	"compatibility_date": "2025-02-23",
+	"compatibility_date": "2025-03-21",
 	"compatibility_flags": ["nodejs_compat"],
 
 	// Public environment variables
