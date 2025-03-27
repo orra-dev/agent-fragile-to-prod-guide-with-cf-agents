@@ -48,39 +48,24 @@ for dir in "$BASE_DIR"/*; do
   fi
 done
 
-# Step 6: Add the ORRA_API_KEY to all .env files
-echo "Adding ORRA_API_KEY to .env files..."
+# Step 6: Add the ORRA_API_KEY to all .dev.vars files
+echo "Adding ORRA_API_KEY to environment files..."
 for dir in "$BASE_DIR"/*; do
   if [ -d "$dir" ]; then
-    ENV_FILE="$dir/.env"
-    if [ -f "$ENV_FILE" ]; then
-      echo "Updating $ENV_FILE"
+    # Handle .dev.vars files for Cloudflare Workers
+    DEV_VARS_FILE="$dir/.dev.vars"
+    if [ -f "$DEV_VARS_FILE" ]; then
+      echo "Updating $DEV_VARS_FILE"
       # Check if ORRA_API_KEY line exists in the file
-      if grep -q "^ORRA_API_KEY=" "$ENV_FILE"; then
+      if grep -q "^ORRA_API_KEY=" "$DEV_VARS_FILE"; then
         # Replace existing ORRA_API_KEY line
-        sed -i '' "s|^ORRA_API_KEY=.*$|ORRA_API_KEY=$ORRA_API_KEY|" "$ENV_FILE"
+        sed -i '' "s|^ORRA_API_KEY=.*$|ORRA_API_KEY=$ORRA_API_KEY|" "$DEV_VARS_FILE"
       else
         # Add ORRA_API_KEY line if it doesn't exist
-        echo "ORRA_API_KEY=$ORRA_API_KEY" >> "$ENV_FILE"
+        echo "ORRA_API_KEY=$ORRA_API_KEY" >> "$DEV_VARS_FILE"
       fi
-    else
-      # Create new .env file if it doesn't exist
-      echo "Creating new $ENV_FILE"
-      echo "ORRA_API_KEY=$ORRA_API_KEY" > "$ENV_FILE"
     fi
   fi
 done
-
-# Step 7: Create data.json file by copying from example
-DATA_JSON_EXAMPLE="$BASE_DIR/data.json-example"
-DATA_JSON="$BASE_DIR/data.json"
-
-if [ -f "$DATA_JSON_EXAMPLE" ]; then
-  echo "Creating data.json from example..."
-  cp "$DATA_JSON_EXAMPLE" "$DATA_JSON"
-  echo "data.json created successfully"
-else
-  echo "Warning: data.json-example not found, skipping data.json creation"
-fi
 
 echo "Setup completed successfully!"
