@@ -13,27 +13,27 @@ echo "Base directory: $BASE_DIR"
 echo "Resetting orra configuration..."
 orra config reset
 
-# Step 2: Remove dbstore
-echo "Removing dbstore..."
+# Step 2: Remove orra dbstore
+echo "Removing orra dbstore..."
 rm -rf "$HOME/.orra/dbstore"
 
-# Step 3: Remove .orra-data directories from top-level subdirectories
-echo "Removing .orra-data directories..."
+# Step 3: Remove .wrangler directories from top-level subdirectories
+echo "Removing .wrangler directories..."
 for dir in "$BASE_DIR"/*; do
     if [ -d "$dir" ]; then
-        ORRA_DATA_DIR="$dir/.orra-data"
-        if [ -d "$ORRA_DATA_DIR" ]; then
-            echo "Removing $ORRA_DATA_DIR"
-            rm -rf "$ORRA_DATA_DIR"
+        CF_LOCAL_DIR="$dir/.wrangler"
+        if [ -d "$CF_LOCAL_DIR" ]; then
+            echo "Removing $CF_LOCAL_DIR"
+            rm -rf "$CF_LOCAL_DIR"
         fi
     fi
 done
 
-# Step 4: Clear ORRA_API_KEY in .env files
-echo "Clearing ORRA_API_KEY in .env files..."
+# Step 4: Clear ORRA_API_KEY in .dev.vars files
+echo "Clearing ORRA_API_KEY in .dev.vars files..."
 for dir in "$BASE_DIR"/*; do
     if [ -d "$dir" ]; then
-        ENV_FILE="$dir/.env"
+        ENV_FILE="$dir/.dev.vars"
         if [ -f "$ENV_FILE" ]; then
             echo "Updating $ENV_FILE"
             # Replace the ORRA_API_KEY line with an empty value
@@ -41,12 +41,5 @@ for dir in "$BASE_DIR"/*; do
         fi
     fi
 done
-
-# Step 5: Remove data.json file if it exists
-DATA_JSON="$BASE_DIR/data.json"
-if [ -f "$DATA_JSON" ]; then
-    echo "Removing $DATA_JSON"
-    rm -f "$DATA_JSON"
-fi
 
 echo "Reset completed successfully!"
