@@ -14,12 +14,13 @@ We've transformed our application in two significant ways (with orra's Plan Engi
 
 ### 1. Split the Monolith into Specialized Components
 
-First, we divided the monolithic assistant into four specialized components:
+First, we divided the monolithic assistant into five specialized components:
 
 1. **Product Advisor Agent**: An LLM-powered agent that understands complex user needs and recommends products
 2. **Inventory Tool as Service**: Checks real-time product availability, and reserves/releases product stock
 3. **Purchasing Tool as Service**: Handles product purchase processing for users
 4. **Delivery Agent**: Uses real-time data to estimate delivery times
+5. **Marketplace Data Service**: A stateful service using Durable Objects to store and manage products, users, and orders data, making the application Cloudflare-compatible
 
 ### 2. Migrated Tool Calls to Dedicated Services
 
@@ -76,7 +77,7 @@ We'll be using the [CLI](https://github.com/orra-dev/orra/blob/main/docs/cli.md)
 
 The assumption here is that there's a chat UI interface that forwards requests to the Plan Engine.
 
-We use lowdb to query and update data in our [data.json](data.json) file - basically a simple JSON based DB. This data is shared against all the components.  
+We use the **Marketplace Data Service** (a Durable Object) to store and manage products, users, and orders data. This approach is Cloudflare-compatible, replacing the previous lowdb/data.json approach. The Durable Object provides persistence and state management for our application data.
 
 1. **Ask for a product recommendation**
 
@@ -116,7 +117,10 @@ In this case, there should be
 - The product is purchased - causing an order to be placed
 - Any interim errors are handled by orra
 
-Navigate to the [data.json](data.json) file to view the placed `order` in the `orders` list.
+You can check the created order by making a GET request to the Marketplace Data Service:
+```bash
+curl http://localhost:8787/orders  # Replace with your actual service URL
+```
 
 ### Reset Environment
 
@@ -149,6 +153,11 @@ Navigate to the [data.json](data.json) file to view the placed `order` in the `o
 4. **Better Reliability**:
     - Issues in one component don't necessarily impact others
     - Deterministic services have fewer failure modes than LLM-based agents
+
+5. **Cloudflare Compatibility**:
+    - Using Durable Objects for persistence makes the application deployable on Cloudflare
+    - Stateful components operate reliably in a serverless environment
+    - Improved scalability with Cloudflare's global network
 
 ## How orra Helps
 
