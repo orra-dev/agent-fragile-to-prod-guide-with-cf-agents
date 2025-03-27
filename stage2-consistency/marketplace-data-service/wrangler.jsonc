@@ -1,0 +1,33 @@
+/**
+ * Wrangler configuration for the Marketplace Data Service
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+  "$schema": "https://json.schemastore.org/wrangler.json",
+  "name": "marketplace-data-service",
+  "main": "index.js",
+  "compatibility_date": "2025-03-21",
+  "compatibility_flags": [ "nodejs_compat" ],
+  "dev": {
+    "ip": "127.0.0.1",
+    "port": 8788,
+    "local_protocol": "http"
+  },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "MARKETPLACE_DATA",
+        "class_name": "MarketplaceDataStore"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["MarketplaceDataStore"]
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}
