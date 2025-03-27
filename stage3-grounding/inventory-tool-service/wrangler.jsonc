@@ -1,0 +1,33 @@
+/**
+ * Wrangler configuration for the Marketplace Data Service
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+	"$schema": "https://json.schemastore.org/wrangler.json",
+	"name": "inventory-tool-service",
+	"main": "index.js",
+	"compatibility_date": "2025-03-21",
+	"compatibility_flags": [ "nodejs_compat" ],
+	"dev": {
+		"ip": "127.0.0.1",
+		"port": 8789,
+		"local_protocol": "http"
+	},
+	"durable_objects": {
+		"bindings": [
+			{
+				"name": "INVENTORY_TOOL_SERVICE",
+				"class_name": "InventoryToolService"
+			}
+		]
+	},
+	"migrations": [
+		{
+			"tag": "v1",
+			"new_sqlite_classes": ["InventoryToolService"]
+		}
+	],
+	"observability": {
+		"enabled": true
+	}
+}

@@ -1,0 +1,20 @@
+{
+	"name": "inventory-tool-do",
+	"version": "1.0.0",
+	"description": "Inventory management previously a tool now a Cloudflare DO service for the marketplace assistant",
+	"main": "do.js",
+	"type": "module",
+	"scripts": {
+		"start": "wrangler dev --log-level info",
+		"deploy": "wrangler deploy",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Team orra",
+	"license": "MIT",
+	"dependencies": {
+		"@orra.dev/sdk": "^0.2.3"
+	},
+	"devDependencies": {
+		"wrangler": "^4.4.0"
+	}
+}

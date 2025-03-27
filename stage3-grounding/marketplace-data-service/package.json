@@ -1,0 +1,18 @@
+{
+	"name": "marketplace-data-service",
+	"version": "1.0.0",
+	"description": "A central data service that provides access to marketplace products, user info, orders, etc..",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"start": "wrangler dev --log-level info",
+		"deploy": "wrangler deploy",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Team orra",
+	"license": "MIT",
+	"dependencies": {},
+	"devDependencies": {
+		"wrangler": "^4.4.0"
+	}
+}
