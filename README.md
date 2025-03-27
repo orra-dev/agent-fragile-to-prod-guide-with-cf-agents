@@ -1,4 +1,4 @@
-# WIP: From Fragile to Production-Ready Multi-Agent App (with Cloudflare Agents)
+# From Fragile to Production-Ready Multi-Agent App (with Cloudflare Agents)
 
 This guide demonstrates how to transform an AI-powered Marketplace Assistant into a production-ready multi-agent application using [orra](https://github.com/orra-dev/orra).
 
@@ -10,6 +10,14 @@ We'll explore how to build a marketplace assistant that helps users find and pur
 
 This guide is a compliment to the [Wrangling Wild Agents](https://docs.google.com/presentation/d/1hTegIOTg4tuzU2EJck_dkWYUqw9VsthHtKBmNNJJ1vI/edit?usp=sharing) talk by the orra team, presented at the [AI in Production](https://home.mlops.community/home/videos/wrangling-wild-agents-ezo-saleh-and-aisha-yusaf-ai-in-production-2025-03-21) 2025 conference. We'll be using various sections of that talk in this guide.
 
+## Cloudflare Integration 
+
+This implementation uses Cloudflare's Workers and Durable Objects to build a robust, serverless architecture:
+
+- **Local Development**: You can run everything locally using [wrangler](https://developers.cloudflare.com/workers/wrangler/) and miniflare. Each stage includes a setup script that configures the environment.
+- **Production Deployment**: The same code can be deployed to Cloudflare's global network with minimal changes. You'll just need to update service URLs to point to your deployed Workers instead of localhost.
+- **Durable Objects**: Stage 1 introduces a MarketplaceDataService using Durable Objects for state management, replacing the file-based storage from the original guide.
+
 ## Guide Progression: 3 Stages to Production Readiness
 
 ### [Stage 0: Monolithic Agent](./monolithic-app)
@@ -20,6 +28,7 @@ This guide is a compliment to the [Wrangling Wild Agents](https://docs.google.co
 - Build a distributed system with specialized agents and tools as services
 - Integrate with orra for coordination, optimal performance, reduced costs and out of the box reliability 
 - Implement efficient communication between components with execution plans
+- Uses Cloudflare Durable Objects for persistent data storage
 - [View implementation and details](./stage1-architecture/README.md)
 
 ### [Stage 2: Reliable Consistency with orra](./stage2-consistency)
@@ -42,12 +51,13 @@ Each component demonstrates orra's capabilities:
 - **Inventory Service**: Simulated inventory database with holds and releases
 - **Delivery Agent**: Estimates delivery times based on various factors
 - **Purchasing Service**: A product purchasing that creates orders, makes payments with occasional failures and notifies users
+- **Marketplace Data Service**: Durable Object-based data store for products, users, and orders
 
 ## Getting Started
 
 1. Make sure you have Node.js installed (v18 or later)
 2. Clone this repository
-3. Follow the orra's [installation instructions](https://github.com/orra-dev/orra?tab=readme-ov-file#installation).
+3. Follow the orra's [installation instructions](https://github.com/orra-dev/orra?tab=readme-ov-file#installation)
 4. Follow the instructions in each stage's README.md file
 5. Run the provided scripts in each stage to see the improvements in action
 
@@ -94,6 +104,7 @@ Each stage builds upon the previous one and includes:
 - Domain grounding prevents hallucinated plans and actions
 - An audit trail is essential for system reliability
 - orra provides a comprehensive platform for building robust AI applications
+- Cloudflare Workers and Durable Objects offer a scalable, serverless foundation for AI systems
 
 <br/>
 <a href="https://news.ycombinator.com/submitlink?u=https://github.com/orra-dev/agent-fragile-to-prod-guide-with-cf-agents&t=From%20Fragile%20to%20Production-Ready%20Multi-Agent%20App%20With%20Cloudflare%20Agents" style="display: inline-block; background-color: #EC4899; color: white; font-family: sans-serif; font-size: 14px; padding: 8px 16px; border-radius: 5px; text-decoration: none;">Discuss on Hacker News</a>
