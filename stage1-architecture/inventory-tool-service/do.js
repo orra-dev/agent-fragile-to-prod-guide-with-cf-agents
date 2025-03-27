@@ -89,6 +89,11 @@ Supported actions: checkAvailability (gets product status), reserveProduct (redu
 	async fetch(request) {
 		const url = new URL(request.url);
 		
+		// For root path, return a simple confirmation message
+		if (url.pathname === "/") {
+			return new Response("Inventory Tool Service activated", { status: 200 });
+		}
+		
 		// Basic health endpoint for monitoring
 		if (url.pathname === "/health") {
 			return new Response(JSON.stringify({

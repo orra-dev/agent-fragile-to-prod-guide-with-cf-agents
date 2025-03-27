@@ -1,0 +1,22 @@
+{
+	"name": "product-advisor-agent",
+	"version": "1.0.0",
+	"description": "Product advisor agent for the marketplace assistant\"",
+	"main": "agent.js",
+	"type": "module",
+	"scripts": {
+		"start": "wrangler dev --log-level info",
+		"deploy": "wrangler deploy",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Team orra",
+	"license": "MIT",
+	"dependencies": {
+		"@orra.dev/sdk": "^0.2.3",
+		"agents": "^0.0.43",
+		"openai": "^4.11.0"
+	},
+	"devDependencies": {
+		"wrangler": "^4.4.0"
+	}
+}

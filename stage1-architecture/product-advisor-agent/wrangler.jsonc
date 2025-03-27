@@ -1,0 +1,39 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "product-advisor-agent",
+	"main": "index.js",
+	"compatibility_date": "2025-03-21",
+	"compatibility_flags": ["nodejs_compat"],
+
+	// Public environment variables
+	"vars": {
+		// OPENAI_API_KEY should be set as a secret
+	},
+
+	"dev": {
+		"ip": "127.0.0.1",
+		"port": 8790,
+		"local_protocol": "http"
+	},
+
+	// Durable Object bindings
+	"durable_objects": {
+		"bindings": [
+			{
+				"name": "ProductAdvisorAgent",
+				"class_name": "ProductAdvisorAgent"
+			}
+		]
+	},
+
+	// Migrations for Durable Objects
+	"migrations": [
+		{
+			"tag": "v1",
+			"new_sqlite_classes": ["ProductAdvisorAgent"]
+		}
+	],
+	"observability": {
+		"enabled": true
+	}
+}
