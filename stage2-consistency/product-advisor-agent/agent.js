@@ -91,7 +91,7 @@ export class ProductAdvisorAgent extends Agent {
 	
 	// Health check to keep the agent alive
 	async healthCheck() {
-		console.log("Delivery Agent health check completed");
+		console.log("Product Advisor Agent health check completed");
 		
 		// Re-schedule the health check to ensure continuity
 		await this.schedule(30, "healthCheck");
