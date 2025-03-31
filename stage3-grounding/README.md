@@ -93,6 +93,11 @@ constraints:
    ```bash
    orra verify webhooks start http://localhost:3000/webhook
    ```
+5. **Activate Cloudflare components (in terminal window where you initialized orra configuration)**
+   ```bash
+   ./activate.sh #activates all the components so they can register with orra
+   ```
+
 ### Using the Application
 
 In this case we just want to demonstrate how grounding works.
@@ -100,6 +105,8 @@ In this case we just want to demonstrate how grounding works.
 Again, we'll be using the [CLI](https://github.com/orra-dev/orra/blob/main/docs/cli.md)'s `orra verify` command to understand how the Plan Engine is coordinating our components to complete system actions.
 
 The assumption here is that there's a chat UI interface that forwards requests to the Plan Engine.
+
+We use the **Marketplace Data Service** (a Durable Object) to store and manage products, users, and orders data. This approach is Cloudflare-compatible, replacing the previous lowdb/data.json approach. The Durable Object provides persistence and state management for our application data.
 
 1. **Apply the grounding**
 

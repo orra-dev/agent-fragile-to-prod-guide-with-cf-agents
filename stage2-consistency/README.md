@@ -52,6 +52,11 @@ We've implemented compensation handlers for critical operations:
    ```bash
    orra verify webhooks start http://localhost:3000/webhook
    ```
+5. **Activate Cloudflare components (in terminal window where you initialized orra configuration)**
+   ```bash
+   ./activate.sh #activates all the components so they can register with orra
+   ```
+   
 ### Using the Application
 
 In this case we just want to demonstrate how the AI Marketplace Assistant can handle payment failures in our purchasing flow.
@@ -60,7 +65,7 @@ Again, we'll be using the [CLI](https://github.com/orra-dev/orra/blob/main/docs/
 
 The assumption here is that there's a chat UI interface that forwards requests to the Plan Engine.
 
-We use lowdb to query and update data in our [data.json](data.json) file - basically a simple JSON based DB. This data is shared against all the components.
+We use the **Marketplace Data Service** (a Durable Object) to store and manage products, users, and orders data. This approach is Cloudflare-compatible, replacing the previous lowdb/data.json approach. The Durable Object provides persistence and state management for our application data.
 
 1. **Purchase a recommended product**
 
@@ -77,7 +82,10 @@ In this case, there should be
 - A product purchase is attempted and fails after retries
 - The reserved product is released using [orra compensations](https://github.com/orra-dev/orra/blob/main/docs/compensations.md) running the [onRevert Handler](#compensation-handler-definition). 
 
-Navigate to the [data.json](data.json) file there should be NO placed `order` in the `orders` list.
+```bash
+# Get all the orders - there should be NO placed `order` in the `orders` list
+curl -X GET http://localhost:8788/orders
+```
 
 ### Reset Environment
 

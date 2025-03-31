@@ -69,6 +69,10 @@ This architectural shift is enabled by orra's Plan Engine, which operates at the
    ```bash
    orra verify webhooks start http://localhost:3000/webhook
    ```
+5. **Activate Cloudflare components (in terminal window where you initialized orra configuration)**
+   ```bash
+   ./activate.sh #activates all the components so they can register with orra
+   ```
 ### Using the Application
 
 Let's run the expected AI Marketplace Assistant interactions [described here](../README.md#example-user-interaction). 
