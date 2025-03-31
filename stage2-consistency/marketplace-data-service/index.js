@@ -36,6 +36,13 @@ export class MarketplaceDataStore {
 		
 		// GET requests for retrieving data
 		if (request.method === 'GET') {
+			// Basic health endpoint for monitoring
+			if (url.pathname === "/health") {
+				return new Response(JSON.stringify({ status: 'healthy' }), {
+					headers: { 'Content-Type': 'application/json' }
+				});
+			}
+			
 			// Get all products
 			if (path === '/products') {
 				const products = await this.state.storage.get('products');
@@ -157,7 +164,7 @@ export class MarketplaceDataStore {
 				const orderData = await request.json();
 				
 				// Validate required fields
-				if (!orderData.userId || !orderData.productId || !orderData.productName || 
+				if (!orderData.userId || !orderData.productId || !orderData.productName ||
 					!orderData.price || !orderData.status || !orderData.deliveryDate) {
 					return new Response('Missing required fields', { status: 400 });
 				}

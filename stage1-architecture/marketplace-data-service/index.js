@@ -36,6 +36,13 @@ export class MarketplaceDataStore {
 		
 		// GET requests for retrieving data
 		if (request.method === 'GET') {
+			// Basic health endpoint for monitoring
+			if (url.pathname === "/health") {
+				return new Response(JSON.stringify({ status: 'healthy' }), {
+					headers: { 'Content-Type': 'application/json' }
+				});
+			}
+			
 			// Get all products
 			if (path === '/products') {
 				const products = await this.state.storage.get('products');
