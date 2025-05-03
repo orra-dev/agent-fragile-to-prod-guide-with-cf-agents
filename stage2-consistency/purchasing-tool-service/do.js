@@ -46,10 +46,9 @@ export class PurchasingToolService {
 				
 				// Process the purchase order
 				const result = purchaseProduct(mktPlaceDataUrl, userId, productId, deliveryDate);
-				// FEATURE COMING SOON:
-				// if (result.status !== 'success') {
-				//   return task.abort(result);
-				// }
+				if (result.status !== 'success') {
+				  return task.abort(result);
+				}
 				return result;
 			});
 			
