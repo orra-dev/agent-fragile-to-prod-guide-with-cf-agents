@@ -119,7 +119,7 @@ Example inventory release compensation:
 
 ```javascript
 // Register compensation handler for inventory reservation
-inventoryService.onRevert(async (task, result) => {
+inventoryService.onRevert(async (task, result, context) => {
    // Only process compensations for reserveProduct actions
    if (task.input.action === 'reserveProduct' && result.success) {
       // Compensation logic: release the product that was reserved
