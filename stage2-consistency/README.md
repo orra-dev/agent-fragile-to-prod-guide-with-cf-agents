@@ -109,7 +109,8 @@ curl -X GET http://localhost:8788/orders
 
 - **Compensation Framework**: orra provides built-in support for defining compensation handlers
 - **Automatic Triggering**: Compensation is automatically triggered when operations fail
-- **Orchestration**: orra manages the complex flow of operations and compensations
+- **Compensation Context**: Revert handlers [have access to a context](https://github.com/orra-dev/orra/blob/main/docs/sdks/js-sdk.md#compensation-context) with details on what triggered the compensation  
+- **Managing Compensation Failures**: orra provides monitoring hooks and with detailed failure audit logs for human operator intervention
 
 ## Implementation Details
 
