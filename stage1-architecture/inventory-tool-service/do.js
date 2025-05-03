@@ -45,10 +45,9 @@ Supported actions: checkAvailability (gets product status), reserveProduct (redu
 				const mktPlaceDataUrl = this.env.MARKETPLACE_DATA_URL;
 				const result = await execInventory(mktPlaceDataUrl, action, productId);
 				
-				// FEATURE COMING SOON:
-				// if (result.status !== 'success') {
-				//   return task.abort(result);
-				// }
+				if (result.status !== 'success') {
+				  return task.abort(result);
+				}
 				
 				return result;
 			});
