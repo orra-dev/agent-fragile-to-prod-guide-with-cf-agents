@@ -1,4 +1,4 @@
-import initialData from './init-data.json' assert { type: 'json' };
+import initialData from './init-data.json' with { type: 'json' };
 
 // MarketplaceDataStore implementation as a Durable Object
 export class MarketplaceDataStore {

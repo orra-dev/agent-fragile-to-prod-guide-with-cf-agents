@@ -1,5 +1,5 @@
 import { initService } from "@orra.dev/sdk";
-import schema from './schema.json' assert { type: 'json' };
+import schema from './schema.json' with { type: 'json' };
 import { execInventory, releaseProduct } from "./core.js";
 
 const SECONDS = 1000;
