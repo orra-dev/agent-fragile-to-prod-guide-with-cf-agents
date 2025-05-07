@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 import { initAgent } from "@orra.dev/sdk";
-import schema from './schema.json' assert { type: 'json' };
+import schema from './schema.json' with { type: 'json' };
 import Advisor from "./core.js";
 import { Agent } from "agents";
 

@@ -1,5 +1,5 @@
 import { initService } from "@orra.dev/sdk";
-import schema from './schema.json' assert { type: 'json' };
+import schema from './schema.json' with { type: 'json' };
 import { execInventory, releaseProduct } from "./core.js";
 
 const SECONDS = 1000;
@@ -39,7 +39,7 @@ Supported actions: checkAvailability (gets product status), reserveProduct (redu
 			});
 			
 			// Register compensation handler
-			this.orraSvc.onRevert(async (task, result) => {
+			this.orraSvc.onRevert(async (task, result, context) => {
 				// Only process compensations for reserveProduct actions
 				if (task.input.action === 'reserveProduct' && result.success) {
 					console.log('Reverting inventory product for task:', task.id);
@@ -58,12 +58,9 @@ Supported actions: checkAvailability (gets product status), reserveProduct (redu
 				
 				const { action, productId } = task.input;
 				const result = await execInventory(this.mktPlaceDataUrl, action, productId);
-				
-				// FEATURE COMING SOON:
-				// if (result.status !== 'success') {
-				//   return task.abort(result);
-				// }
-				
+				if (result.status !== 'success') {
+				  return task.abort(result);
+				}
 				return result;
 			});
 			

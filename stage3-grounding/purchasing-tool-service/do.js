@@ -1,5 +1,5 @@
 import { initService } from "@orra.dev/sdk";
-import schema from './schema.json' assert { type: 'json' };
+import schema from './schema.json' with { type: 'json' };
 import { purchaseProduct } from "./core.js";
 
 const SECONDS = 1000;
@@ -46,10 +46,9 @@ export class PurchasingToolService {
 				
 				// Process the purchase order
 				const result = purchaseProduct(mktPlaceDataUrl, userId, productId, deliveryDate);
-				// FEATURE COMING SOON:
-				// if (result.status !== 'success') {
-				//   return task.abort(result);
-				// }
+				if (result.status !== 'success') {
+				  return task.abort(result);
+				}
 				return result;
 			});
 			

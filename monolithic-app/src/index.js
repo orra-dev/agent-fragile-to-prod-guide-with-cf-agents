@@ -2,7 +2,7 @@
 import { Agent } from "agents";
 import OpenAI from "openai";
 import * as tools from "./tools.js";
-import data from './data.json' assert { type: 'json' };
+import data from './data.json' with { type: 'json' };
 
 export class MarketplaceAgent extends Agent {
 	constructor(state, env) {
