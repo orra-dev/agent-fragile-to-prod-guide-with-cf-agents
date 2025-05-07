@@ -109,8 +109,9 @@ curl -X GET http://localhost:8788/orders
 
 - **Compensation Framework**: orra provides built-in support for defining compensation handlers
 - **Automatic Triggering**: Compensation is automatically triggered when operations fail
-- **Compensation Context**: Revert handlers [have access to a context](https://github.com/orra-dev/orra/blob/main/docs/sdks/js-sdk.md#compensation-context) with details on what triggered the compensation  
+- **Compensation Context**: Revert handlers [have access to a context](https://github.com/orra-dev/orra/blob/main/docs/sdks/js-sdk.md#compensation-context) with details on what triggered the compensation (failure or abort)  
 - **Compensation Failures**: orra provides [monitoring hooks](https://github.com/orra-dev/orra/blob/main/docs/monitoring-with-webhooks.md) with detailed audit logs for human operator intervention
+- **Aborting Tasks**: any task maybe aborted based on business logic, this triggers compensations 
 
 ## Implementation Details
 
